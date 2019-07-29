@@ -1,0 +1,48 @@
+.model SMALL
+.stack 100H
+.data
+	msg1 db 10,'Enter first number:',10,'$'
+	msg2 db 10,'Enter second number:',10,'$'
+	num1 db ?
+	num2 db ?
+	num3 db 2
+	num4 db 3
+.code
+.startup
+
+	mov ax,@data
+	mov ds,ax
+
+	;Display first message
+	mov dx,offset msg1
+	mov ah,09
+	int 21h
+
+	;Input first number and save in num1
+	mov ah,01
+	int 21h
+	sub al,48 ;convert to decimal
+	mov num1,al
+
+	;Diplay second message
+	mov dx,offset msg2
+	mov ah,09
+	int 21h
+
+	;Input second number and save in num2
+	mov ah,01
+	int 21h
+	sub al,48 ;convert to decimal
+	mov num2,al
+
+	;Add the two numbers
+	mov al,num1
+	add al,num2
+
+	;Display result
+	add al,48 ;convert to ascii
+	mov dl,al
+	mov ah,02
+	int 21h
+.EXIT
+END
