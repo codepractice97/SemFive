@@ -13,7 +13,7 @@
 	mov ds,ax
 
 	;Display first message
-	mov dl,offset msg1
+	mov dx,offset msg1
 	mov ah,09
 	int 21h
 
@@ -36,7 +36,9 @@
 
 	;Add the two numbers
 	mov al,num1
-	add al,num2
+	;add al,num2
+
+	AAA ax,num2
 
 	;Display third message
 	mov dx,offset msg3

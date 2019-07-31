@@ -25,7 +25,7 @@
 
 	;Diplay second message
 	mov dx,offset msg2
-	mov ah,09
+	mov ah,09H
 	int 21h
 
 	;Input second number and save in num2
