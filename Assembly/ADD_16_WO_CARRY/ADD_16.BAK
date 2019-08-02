@@ -1,0 +1,20 @@
+.model SMALL
+.stack 100H
+.data
+	msg1 db 'Sum of $'
+	msg2 db ': $'
+	num1 dw 45
+	num2 dw 56
+	sum dw ?
+.code
+.startup
+	mov ax,@data
+	mov ds,ax
+
+	;Add the two numbers
+	mov ax,num1
+	add ax,num2
+
+	
+.exit
+END

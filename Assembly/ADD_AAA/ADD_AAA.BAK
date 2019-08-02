@@ -39,6 +39,7 @@
 	mov al,num1
 	add al,num2
 
+	mov ah,0 ;clear register
 	AAA
 	;or ax, 3030h
 	mov sum,ax
@@ -46,6 +47,10 @@
 	;Display third message
 	mov dx,offset msg3
 	mov ah,09
+	int 21h
+
+	mov dx,sum
+	add ah,09
 	int 21h
 
 	;Display tens digit

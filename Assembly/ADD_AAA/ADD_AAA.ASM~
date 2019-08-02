@@ -6,6 +6,7 @@
 	msg3 db 10,'Result: ','$'
 	num1 db ?
 	num2 db	?
+	sum dw ?
 .code
 .startup
 
@@ -35,20 +36,32 @@
 	mov num2,al
 
 	;Add the two numbers
+	mov ah,0 ;clear register
 	mov al,num1
-	;add al,num2
+	add al,num2
 
-	AAA ax,num2
+	AAA
+	;or ax, 3030h
+	mov sum,ax
 
 	;Display third message
 	mov dx,offset msg3
 	mov ah,09
 	int 21h
 
-	;Display result
-	add al,48 ;convert to ascii
-	mov dl,al
+	;Display tens digit
+	mov ax,sum
+	mov dl,ah
+	add dl,48 ;convert to ascii
 	mov ah,02
 	int 21h
+
+	;Display ones digit
+	mov ax,sum
+	mov dl,al
+	add dl,48
+	mov ah,02
+	int 21h
+
 .EXIT
 END

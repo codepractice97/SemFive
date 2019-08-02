@@ -36,10 +36,10 @@
 	mov num2,al
 
 	;Add the two numbers
-	mov ah,0 ;clear register
 	mov al,num1
 	add al,num2
 
+	mov ah,0 ;clear register
 	AAA
 	;or ax, 3030h
 	mov sum,ax
