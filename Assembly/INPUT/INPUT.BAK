@@ -1,0 +1,33 @@
+.mdoel SMALL
+.stack 100H
+.data
+	msg1 db 'Enter a number: $'
+	msg2 db 10,'Your Entered: $'
+.code
+.startup
+	mov ax,@data
+	mov ds,ax
+
+	;Display First Message
+	mov dx,offset msg1
+	mov ah,09
+	int 21h
+
+	;Take Input
+	mov ah,01
+	int 21h
+
+	mov bh,al
+
+	;Display second message
+	mov dx,offset msg2
+	mov ah,09
+	int 21h
+
+	;Display Result
+	mov dl,bh
+	mov ah,02
+	int 21h
+
+.exit
+END
