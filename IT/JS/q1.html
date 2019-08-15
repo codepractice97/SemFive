@@ -1,0 +1,105 @@
+<html>
+<head>
+  <title>
+      Form Check
+  </title>
+  <style>
+    form span {
+      color: brown;
+    }
+  </style>
+  <script>
+    msgs = [
+      "Field should not be empty. ",
+      "Should only contain alphabets. ",
+      "Should be a 7 digit numeric value. ",
+      "Should be of format dd/mm/yyyy. "
+    ]
+    months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",];
+    function checkName(){
+      name = document.getElementsByName("name")[0].value;
+      check = false;
+      for (i = 0; i < name.length; i++) {
+        const el = name.charAt(i);
+        if (!((el >= 'A' && el <= 'Z') || (el >= 'a' && el <= 'z')))
+          check = true;
+      }
+      if (name.length == 0)
+        document.getElementById("name_status").innerText = msgs[0];
+      else {
+        if (check)
+          document.getElementById("name_status").innerText = msgs[1];
+        else {
+          document.getElementById("name_status").innerText = "";
+          return true;
+        }
+      }
+    }
+    function checkRoll(){
+      roll = document.getElementsByName("roll")[0].value;
+      check = false;
+      for (i = 0; i < roll.length; i++) {
+        const el = roll.charAt(i);
+        if (!(el >= '0' && el <= '9'))
+          check = true;
+      }
+      if (roll.length == 0)
+        document.getElementById("roll_status").innerText = msgs[0];
+      else {
+        if (check || roll.length != 7)
+          document.getElementById("roll_status").innerText = msgs[2];
+        else {
+          document.getElementById("roll_status").innerText = "";
+          return true;
+        }
+      }
+    }
+    function checkDate(){
+      d = document.getElementsByName("date")[0].value;
+      document.getElementById("date_format").innerText = "";
+      check = false;
+      if (!(/^([0-9]{2}\/[0-9]{2}\/[0-9]{4})$/.test(d)))
+        check = true;
+      if (d.length == 0)
+        document.getElementById("date_status").innerText = msgs[0];
+      else {
+        if (check)
+          document.getElementById("date_status").innerText = msgs[3];
+        else{
+          document.getElementById("date_status").innerText = "";
+          d = d.split('/');
+          date = parseInt(d[0]);
+          month = parseInt(d[1]) - 1;
+          year = parseInt(d[2]);
+          d = new Date(`${month}/${date}/${year}`);
+          day = d.getDay();
+          document.getElementById("date_format").innerText = 
+          `Date Entered: ${days[day]}, ${months[month]} ${date}, ${year}`;
+          return true;
+        }
+      }
+    }
+    function checkAll(){
+      checkDate();
+      checkName();
+      checkRoll();
+    }
+  </script>
+</head>
+<body>
+  <form method="GET" >
+    <p>Name:</p>
+    <p><input oninput="checkName()" type="text" name="name" /> <span id="name_status"></span></p>
+    <p>Roll No:</p>
+    <p><input oninput="checkRoll()" type="text" name="roll" /> <span id="roll_status"></span></p>
+    <p>DOB:</p>
+    <p><input oninput="checkDate()" type="text" name="date" /> <span id="date_status"></span></p>
+    <p id="date_format"></p>
+    <button onclick="checkAll()">Submit</button>
+  </form>
+</body>
+</html>
