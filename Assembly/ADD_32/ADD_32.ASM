@@ -4,7 +4,7 @@
 .data
 	msg1 db 'Enter first 32 bit number: $'
 	msg2 db 10,'Enter second 32 bit number: $'
-	msg3 db 10,'Sum is: $'
+	msg3 db 10,'Result is: $'
 	num1 dd ?
 	num2 dd ?
 .code
@@ -62,6 +62,7 @@
 		LOOP inp2
 	MOV num2,EDX
 
+	ADDITION:
 	;Add the two numbers
 	MOV EAX,num1
 	ADD EAX,num2
