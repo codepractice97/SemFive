@@ -9,7 +9,7 @@ int line_num = 0;
 %%
 
 int main(){
-	yyin = fopen("q1input.txt", "r");
+	yyin = fopen("count.txt", "r");
 	yylex();
 	printf("Number of characters: %d\n", char_num);
 	printf("Number of line_num: %d\n", line_num);
