@@ -1,0 +1,42 @@
+<head>
+<title>Static Password Protection</title>
+<style>
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+div {
+    padding: 12px;
+}
+input {
+    margin-bottom: 12px;
+}
+</style>
+<script>
+const USER_NAME = 'mukul';
+const PASSWORD = 'badpassword'
+function login(){
+    if (
+        document.getElementById('user_name').value == USER_NAME &&
+        document.getElementById('password').value == PASSWORD
+    ) alert("Correct User Name and Password\nLogin Successful");
+    else alert("Incorrect user Name or Password");
+}
+</script>
+</head>
+<body>
+    <div>
+    <p>Enter your credentials to Login</p>
+    <form method="POST">
+        <input type="text" name="user_name" id="user_name" placeholder="User Name" required><br>
+        <input type="password" name="password" id="password" placeholder="Password" required><br>
+    </form>
+    <button onclick="login();">Login</button>
+    </div>
+</body>
+</html>

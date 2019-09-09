@@ -1,0 +1,23 @@
+<html>
+<head>
+</head>
+<body>
+    <img id="my_image" src="800px-DVD_video_logo.png" width="110" height="65" style="position: absolute;" />
+<script>
+    x = 0, y = 0;
+    x_max = window.innerWidth - 110;
+    y_max = window.innerHeight - 65;
+    x_incr = 1;
+    y_incr = 1;
+    setInterval(function(){
+        x += x_incr;
+        y += y_incr;
+        if (x>x_max || x==0) x_incr *= -1;
+        if (y>y_max || y==0) y_incr *= -1;
+        document.getElementById('my_image').style.top = y;
+        document.getElementById('my_image').style.left = x;
+        document.getElementById('my_image').style.transform = `translate(${x},${y})`
+    }, 16);
+</script>
+</body>
+</html>

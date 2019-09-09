@@ -1,0 +1,31 @@
+<head>
+    <title>Document</title>
+<script>
+function sort() {
+    arr = document.getElementById('input').value.split(',');
+    for(i = 0; i<arr.length; i++){
+        arr[i] = parseInt(arr[i]);
+    }
+    for (i = 0; i < arr.length; i++){
+        for (j = 0; j < arr.length - i - 1; j++){
+            if (arr[j] > arr[j+1]){
+                t = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = t;
+            }
+        }
+    }
+    document.getElementById('result').innerHTML = "Sorted Aray: ";
+    for(i = 0; i < arr.length; i++){
+        document.getElementById('result').innerHTML += " " + arr[i];
+    }
+}
+</script>
+</head>
+<body>
+    <p>Input a comma separated array of numbers</p>
+    <textarea name="input" id="input" rows="5" cols="30" placeholder="ENTER ARRAY HERE"></textarea><br>
+    <button onclick="sort();">SORT</button>
+    <p id="result"></p>
+</body>
+</html>
