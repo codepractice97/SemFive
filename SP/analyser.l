@@ -1,9 +1,0 @@
-%%
-
-%%
-
-int main(){
-	yyin = fopen("analyser_input.txt","r");
-	yylex();
-	return 0;
-}
