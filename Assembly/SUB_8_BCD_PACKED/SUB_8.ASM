@@ -52,17 +52,20 @@
 
 	;SUBTRACT the two numbers
 	MOV EAX,num1
-	MOV EDX,num2
-	MOV EBX,0
+	MOV EBX,num2
+	MOV EDX,0
 	MOV ECX,4
 	SUB_LOOP:
-		SBB AL,DL
+		RCR DL,1 ; Set Stored Borrow
+		SBB AL,BL
 		DAS
-		MOV BL,AL
-		ROR EBX,8
+		MOV DL,0
+		RCL DL,1 ; Store Borrow in DL
 		ROR EAX,8
-		ROR EDX,8
+		ROR EBX,8
 		LOOP SUB_LOOP
+	MOV EBX,EAX
+	MOV CL,DL ; Store Borrow in CL
 
 	;Display third message
 	mov EDX,offset msg3
@@ -70,12 +73,17 @@
 	int 21H
 
 	;Display Sum
-	MOV AL,0
-	RCL AL,1
-	ADD AL,30H
-	MOV DL,AL
+	CMP CL,1
+	JNE NOT_NEGATIVE
+	MOV EAX,99999999H
+	SUB EAX,EBX
+	ADD EAX,1H
+	MOV EBX,EAX
+	MOV DL,45
 	MOV AH,02H
 	int 21H
+
+	NOT_NEGATIVE:
 	
 	MOV ECX,8
 	dis_result:

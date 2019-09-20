@@ -56,7 +56,7 @@
 	MOV DX,0
 	MOV CX,2
 	SUB_LOOP:
-		RCR DL,1 ; Retrieve Stored Borrow
+		RCR DL,1 ; Set Stored Borrow
 		SBB AL,BL
 		DAS
 		MOV DL,0
@@ -65,6 +65,7 @@
 		ROR AX,8
 		LOOP SUB_LOOP
 	MOV BX,AX
+	MOV CL,DL ; Store borrow in CL
 
 	;Display third message
 	mov DX,offset msg3
@@ -72,12 +73,17 @@
 	int 21H
 
 	;Display Sum
-	MOV AL,0
-	RCL AL,1
-	ADD AL,30H
-	MOV DL,AL
+	CMP CL,1
+	JNE NOT_NEGATIVE
+	MOV AX,9999H
+	SUB AX,BX
+	ADD AX,1H
+	MOV BX,AX
+	MOV DL,45
 	MOV AH,02H
 	int 21H
+	
+	NOT_NEGATIVE:
 	
 	MOV CX,4
 	dis_result:
