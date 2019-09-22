@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 4
-#define YY_END_OF_BUFFER 5
+#define YY_NUM_RULES 5
+#define YY_END_OF_BUFFER 6
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -360,20 +360,20 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[14] =
+static const flex_int16_t yy_accept[13] =
     {   0,
-        0,    0,    5,    4,    3,    4,    0,    1,    0,    0,
-        1,    2,    0
+        0,    0,    6,    5,    3,    1,    2,    4,    0,    4,
+        4,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    3,
-        3,    4,    1,    1,    1,    5,    6,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    2,    1,    1,    1,    1,    1,    3,
+        4,    2,    2,    1,    2,    5,    2,    6,    6,    6,
+        6,    6,    6,    6,    6,    6,    6,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -381,7 +381,7 @@ static const YY_CHAR yy_ec[256] =
 
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    5,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    2,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -400,33 +400,31 @@ static const YY_CHAR yy_ec[256] =
 
 static const YY_CHAR yy_meta[7] =
     {   0,
-        1,    2,    3,    1,    1,    4
+        1,    1,    1,    1,    1,    2
     } ;
 
-static const flex_int16_t yy_base[17] =
+static const flex_int16_t yy_base[14] =
     {   0,
-        0,    0,   17,   18,   18,    3,   12,    0,    9,    0,
-        0,   18,   18,    9,   11,    4
+        0,    0,   10,   11,   11,   11,   11,    2,    0,    0,
+        0,   11,    7
     } ;
 
-static const flex_int16_t yy_def[17] =
+static const flex_int16_t yy_def[14] =
     {   0,
-       13,    1,   13,   13,   13,   13,   14,   15,   14,   16,
-       15,   13,    0,   13,   13,   13
+       12,    1,   12,   12,   12,   12,   12,   12,   13,    8,
+       13,    0,   12
     } ;
 
-static const flex_int16_t yy_nxt[25] =
+static const flex_int16_t yy_nxt[18] =
     {   0,
-        4,    5,    4,    4,    5,    6,    7,   12,    8,    9,
-        9,   11,   10,   11,   11,   10,   13,    3,   13,   13,
-       13,   13,   13,   13
+        4,    5,    6,    7,    4,    8,    9,   10,   11,   12,
+        3,   12,   12,   12,   12,   12,   12
     } ;
 
-static const flex_int16_t yy_chk[25] =
+static const flex_int16_t yy_chk[18] =
     {   0,
-        1,    1,    1,    1,    1,    1,    6,   16,    6,   14,
-       14,   15,    9,   15,   15,    7,    3,   13,   13,   13,
-       13,   13,   13,   13
+        1,    1,    1,    1,    1,    1,    8,    8,   13,    3,
+       12,   12,   12,   12,   12,   12,   12
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -443,8 +441,34 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "analyser.l"
-#line 448 "lex.yy.c"
+#line 1 "arithmetic_expression.l"
+#line 2 "arithmetic_expression.l"
+char stack[100];
+int top = -1;
+int valid = 1;
+int operatorC, operandC = 0;
+
+void push(char ch){
+	if (top == 100)
+		printf("Stack Overflow");
+	else {
+		top++;
+		stack[top] = ch;
+	}
+}
+
+char pop() {
+	if (top == -1){
+		printf("Stack Underflow");
+		exit(1);
+	} else {
+		char ch = stack[top];
+		top--;
+		return ch;
+	}
+}
+#line 471 "lex.yy.c"
+#line 472 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -661,9 +685,9 @@ YY_DECL
 		}
 
 	{
-#line 1 "analyser.l"
+#line 28 "arithmetic_expression.l"
 
-#line 667 "lex.yy.c"
+#line 691 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -690,13 +714,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 14 )
+				if ( yy_current_state >= 13 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 18 );
+		while ( yy_base[yy_current_state] != 11 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -722,27 +746,43 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 2 "analyser.l"
-{ printf("%s is a singleline comment\n", yytext); }
+#line 29 "arithmetic_expression.l"
+{
+	top++;
+	stack[top] = '(';
+}
 	YY_BREAK
 case 2:
-/* rule 2 can match eol */
 YY_RULE_SETUP
-#line 3 "analyser.l"
-{ printf("%s is a multiline comment\n", yytext); }
+#line 33 "arithmetic_expression.l"
+{
+	if (stack[top] != '('){
+		printf("Bracket does not match\n");
+		valid = 0;
+		return 0;
+	} else top--;
+}
 	YY_BREAK
 case 3:
-/* rule 3 can match eol */
 YY_RULE_SETUP
-#line 4 "analyser.l"
-{}
+#line 40 "arithmetic_expression.l"
+{
+	operatorC++;
+}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 5 "analyser.l"
+#line 43 "arithmetic_expression.l"
+{
+	operandC++;
+}
+	YY_BREAK
+case 5:
+YY_RULE_SETUP
+#line 46 "arithmetic_expression.l"
 ECHO;
 	YY_BREAK
-#line 746 "lex.yy.c"
+#line 786 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1039,7 +1079,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 14 )
+			if ( yy_current_state >= 13 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1067,11 +1107,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 14 )
+		if ( yy_current_state >= 13 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 13);
+	yy_is_jam = (yy_current_state == 12);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1747,12 +1787,14 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 5 "analyser.l"
+#line 46 "arithmetic_expression.l"
 
 
-int main(){
-	yyin = fopen("analyser_input.txt","r");
+int main() {
 	yylex();
+	if (valid == 1 && top == -1 && (operandC - operatorC) == 1) {
+		printf("Valid Expression\n");
+	} else 	printf("Invalid Expression\n");
 	return 0;
 }
 
