@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Stack</title>
+        <script>
+        const SIZE = 20;
+        var stack = new Array(SIZE);
+        top_pointer = -1;
+
+        function push() {
+            if (top_pointer < SIZE - 1) {
+                d = document.getElementById("data").value;
+                top_pointer++;
+                stack[top_pointer] = d;
+                console.log("Pushed: "+d);
+            } else console.log("Stack Overflow");
+        }
+
+        function pop(){
+            if (top_pointer==-1) console.log("Stack underflow");
+            else {
+                d = stack[top_pointer];
+                top_pointer--;
+                console.log("Popped: " + d);
+                return d;
+            }
+        }
+        </script>
+    </head>
+    <body>
+        <input type="text" name="data" id="data">
+        <button id="push_btn" onclick="push();">PUSH</button>
+        <button id="pop_btn" onclick="pop();">POP</button>
+        <div id="res"></div>
+    </body>
+</html>
