@@ -71,8 +71,21 @@
     mov EDX, offset msg3
     mov AH,09H
     int 21H
-
+    ; Display Quotient
     mov EBX,quo
+    call DISPLAY_PROC
+
+    ; Display Fourth Message
+    mov EDX, offset msg4
+    mov AH,09H
+    int 21H
+    ; Display Remainder
+    mov EBX,rem
+    call DISPLAY_PROC
+
+.exit
+
+    DISPLAY_PROC PROC
     mov ECX,8
     dis_res1:
         rol EBX,4
@@ -87,27 +100,8 @@
         mov AH,02H
         int 21H
         loop dis_res1
-
-    ; Display Fourth Message
-    mov EDX, offset msg4
-    mov AH,09H
-    int 21H
-
-    mov EBX,rem
-    mov ECX,8
-    dis_res2:
-        rol EBX,4
-        mov AL,BL
-        and AL,0FH
-        add AL,30H
-        cmp AL,39H
-        jle IS_HEX2
-        add AL,7H
-        IS_HEX2:
-        mov DL,AL
-        mov AH,02H
-        int 21H
-        loop dis_res2
+    RET
+    DISPLAY_PROC ENDP
 
 
     TERMINATE:
