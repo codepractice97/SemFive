@@ -7,6 +7,7 @@
 	msg3 db 10,'Sum is: $'
 	num1 dd ?
 	num2 dd ?
+	res dd ?
 .code
 .startup
 	mov EDX,@data
@@ -50,22 +51,32 @@
 		LOOP inp2
 	MOV num2,EDX
 
+
 	;SUBTRACT the two numbers
-	MOV EAX,num1
-	MOV EBX,num2
-	MOV EDX,0
-	MOV ECX,4
-	SUB_LOOP:
-		RCR DL,1 ; Set Stored Borrow
-		SBB AL,BL
-		DAS
-		MOV DL,0
-		RCL DL,1 ; Store Borrow in DL
-		ROR EAX,8
-		ROR EBX,8
-		LOOP SUB_LOOP
-	MOV EBX,EAX
-	MOV CL,DL ; Store Borrow in CL
+	MOV AL,BYTE PTR [num1]
+	MOV BL,BYTE PTR [num2]
+	SBB AL,BL
+	DAS
+	MOV BYTE PTR [res], AL
+
+	MOV AL,BYTE PTR [num1+1]
+	MOV BL,BYTE PTR [num2+1]
+	SBB AL,BL
+	DAS
+	MOV BYTE PTR [res+1], AL
+
+	MOV AL,BYTE PTR [num1+2]
+	MOV BL,BYTE PTR [num2+2]
+	SBB AL,BL
+	DAS
+	MOV BYTE PTR [res+2], AL
+
+	MOV AL,BYTE PTR [num1+3]
+	MOV BL,BYTE PTR [num2+3]
+	SBB AL,BL
+	DAS
+	MOV BYTE PTR [res+3], AL
+
 
 	;Display third message
 	mov EDX,offset msg3
@@ -73,7 +84,10 @@
 	int 21H
 
 	;Display Sum
-	CMP CL,1
+	MOV EBX,res
+	MOV AL,0
+	RCL AL,1
+	CMP AL,1
 	JNE NOT_NEGATIVE
 	MOV EAX,99999999H
 	SUB EAX,EBX
