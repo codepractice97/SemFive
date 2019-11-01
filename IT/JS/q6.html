@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<title>javascript6</title>
+		<script>
+			function validate(){
+				var a = 0, rdbtn=document.getElementsByName("purchase");
+				for(var i=0;i<rdbtn.length;i++)
+				{
+					if(rdbtn.item(i).checked == false)
+					{
+						a++;
+					}
+				}
+				if(a == rdbtn.length)
+				{
+					alert("purchase field is empty");
+				}
+				a=0;
+				var chk=document.getElementsByName("Interests");
+				for(var j=0;j<chk.length;j++)
+				{
+					if(chk.item(j).checked == false)
+					{
+						a++;
+					}
+				}
+				if(a == chk.length)
+				{
+					alert("Interests field is empty");
+				}
+			}
+			
+			function check(){
+				var fn=document.getElementById("fname").value;
+				var ln=document.getElementById("lname").value;
+				var em=document.getElementById("email").value;
+				var ad=document.getElementById("address").value;
+				var cty=document.getElementById("city").value;
+				var st=document.getElementById("state").value;
+				var pin=document.getElementById("pincode").value;
+				var ct=document.getElementById("country").value;
+				if(fn==""||ln==""||em==""||ad==""||cty==""||st==""||pin==""||ct=="")
+					alert("one or more text field are empty");
+				validate();
+			}
+		</script>
+	</head>
+	<body>
+			<form name="form">
+				First Name: <input type="text" id="fname" name="fName"/><br><br>
+				last Name: <input type="text" id="lname" name="lName"/><br><br>
+				Email address: <input type="text" id="email" name="email"/><br><br>
+				Address: <input type="text" id="address" name="address"/><br><br>
+				City: <input type="text" id="city" name="city"/><br><br>
+				State: <input type="text" id="state" name="State"/><br><br>
+				Postal Code: <input type="text" id="pincode" name="pin"/><br><br>
+				Country: <input type="text" id="country" name="country"/><br><br>
+				Please choose the most appropriate statement<br>
+				<input type="radio" name="purchase" value="1"/> I regularly purchase items online <br>
+				<input type="radio" name="purchase" value="2"/> I occasionally purchase items online <br>
+				<input type="radio" name="purchase" value="3"/> I have not pruchased online, nut i would consider it <br>
+				<input type="radio" name="purchase" value="4"/> I prefer to shop in real store <br><br>
+				I am interested in choosing <br>
+				<input type="checkbox" id="hike" name="Interests">hiking <br>
+				<input type="checkbox" id="bike" name="Interests">Mountain biking <br>
+				<input type="checkbox" id="camp" name="Interests">Camping <br>
+				<input type="checkbox" id="climb" name="Interests">Rock climbing <br>
+				<input type="checkbox" id="4WD" name="Interests">Off-Road 4WD <br>
+				<input type="checkbox" id="ski" name="Interests">Cross-country skiing <br>
+				<input type="button" value="Submit" onclick="check()"/>
+			</form>
+		</body>
+</html>
