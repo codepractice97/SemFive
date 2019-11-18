@@ -189,4 +189,19 @@
     <role-name>user</role-name>
   </security-role>
 
+	<jsp-config>
+  <taglib>
+  	<taglib-uri>https://journaldev.com/jsp/tlds/mytags</taglib-uri>
+  	<taglib-location>/WEB-INF/hctags.tld</taglib-location>
+  </taglib>
+	<taglib>
+		<taglib-uri>https://journaldev.com/mukul/prefix</taglib-uri>
+		<taglib-location>/WEB-INF/sstag.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>https://journaldev.com/mukul/reverse</taglib-uri>
+		<taglib-location>/WEB-INF/revtag.tld</taglib-location>
+	</taglib>
+  </jsp-config>
+
 </web-app>

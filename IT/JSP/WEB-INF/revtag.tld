@@ -1,0 +1,15 @@
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>2.0</jsp-version>
+	<uri>https://journaldev.com/mukul/reverse</uri>
+	
+	<tag>
+		<name>reverse</name>
+		<tag-class>pkg.ReverseBean</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>input</name>
+			<required>true</required>
+		</attribute>
+	</tag>
+</taglib>

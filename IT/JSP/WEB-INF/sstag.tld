@@ -1,0 +1,26 @@
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>2.0</jsp-version>
+	<uri>https://journaldev.com/mukul/prefix</uri>
+
+	<tag>
+		<name>prefix</name>
+		<tag-class>pkg.SubstringBean</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>input</name>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>start</name>
+			<required>true</required>
+			<type>java.util.Integer</type>
+		</attribute>
+		<attribute>
+			<name>end</name>
+			<required>true</required>
+			<type>java.util.Integer</type>
+		</attribute>
+	</tag>
+
+</taglib>
