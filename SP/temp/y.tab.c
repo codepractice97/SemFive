@@ -64,10 +64,11 @@
 /* Copy the first part of user declarations.  */
 #line 1 "calc.y" /* yacc.c:339  */
 
+#include <stdio.h>
 extern int yylex();
 void yyerror(const char *s);
 
-#line 71 "y.tab.c" /* yacc.c:339  */
+#line 72 "y.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -126,7 +127,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 130 "y.tab.c" /* yacc.c:358  */
+#line 131 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -423,7 +424,7 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    12,    12,    14,    15,    16,    17,    18,    19,    20
+       0,    13,    13,    15,    16,    17,    18,    19,    20,    21
 };
 #endif
 
@@ -1197,49 +1198,49 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 12 "calc.y" /* yacc.c:1646  */
+#line 13 "calc.y" /* yacc.c:1646  */
     { printf("Result is: %d\n", (yyvsp[-1])); return 0; }
-#line 1203 "y.tab.c" /* yacc.c:1646  */
+#line 1204 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 14 "calc.y" /* yacc.c:1646  */
-    { (yyval)=(yyvsp[-2])+(yyvsp[0]); }
-#line 1209 "y.tab.c" /* yacc.c:1646  */
+#line 15 "calc.y" /* yacc.c:1646  */
+    { (yyval) = (yyvsp[-2])+(yyvsp[0]); }
+#line 1210 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 15 "calc.y" /* yacc.c:1646  */
-    { (yyval)=(yyvsp[-2])-(yyvsp[0]); }
-#line 1215 "y.tab.c" /* yacc.c:1646  */
+#line 16 "calc.y" /* yacc.c:1646  */
+    { (yyval) = (yyvsp[-2])-(yyvsp[0]); }
+#line 1216 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 16 "calc.y" /* yacc.c:1646  */
-    { (yyval)=(yyvsp[-2])*(yyvsp[0]); }
-#line 1221 "y.tab.c" /* yacc.c:1646  */
+#line 17 "calc.y" /* yacc.c:1646  */
+    { (yyval) = (yyvsp[-2])*(yyvsp[0]); }
+#line 1222 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 17 "calc.y" /* yacc.c:1646  */
-    { (yyval)=(yyvsp[-2])/(yyvsp[0]); }
-#line 1227 "y.tab.c" /* yacc.c:1646  */
+#line 18 "calc.y" /* yacc.c:1646  */
+    { (yyval) = (yyvsp[-2])/(yyvsp[0]); }
+#line 1228 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 18 "calc.y" /* yacc.c:1646  */
-    { (yyval)=(yyvsp[-2])%(yyvsp[0]); }
-#line 1233 "y.tab.c" /* yacc.c:1646  */
+#line 19 "calc.y" /* yacc.c:1646  */
+    { (yyval) = (yyvsp[-2])%(yyvsp[0]); }
+#line 1234 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 19 "calc.y" /* yacc.c:1646  */
-    { (yyval)=(yyvsp[-1]); }
-#line 1239 "y.tab.c" /* yacc.c:1646  */
+#line 20 "calc.y" /* yacc.c:1646  */
+    { (yyval) = (yyvsp[-1]); }
+#line 1240 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1243 "y.tab.c" /* yacc.c:1646  */
+#line 1244 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1467,14 +1468,14 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 22 "calc.y" /* yacc.c:1906  */
+#line 23 "calc.y" /* yacc.c:1906  */
 
 
-void main(){
-	printf("\nEnter an expression to calculate: ");
+int main(){
+	printf("Enter an expression to evaluate: ");
 	yyparse();
 }
 
 void yyerror(const char *s){
-	printf("%s\n", s);
+	printf("Error: %s\n", s);
 }

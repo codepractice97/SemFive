@@ -1,6 +1,5 @@
 %{
 #include <stdio.h>
-#include <ctype.h>
 extern int yylex();
 void yyerror(const char *s);
 %}
